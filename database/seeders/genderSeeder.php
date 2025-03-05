@@ -19,5 +19,11 @@ class genderSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        Gender::create([
+            'id' => 2,
+            'name' => 'famele',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

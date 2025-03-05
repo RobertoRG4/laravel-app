@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Superhero;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
             universoSeeder::class,
             superheroSeeder::class,
         ]);
+        Superhero::factory()->count(10)->create();
     }
 }

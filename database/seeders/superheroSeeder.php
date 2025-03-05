@@ -12,6 +12,7 @@ class SuperheroSeeder extends Seeder
      */
     public function run(): void
     {
+        Superhero::factory()->create();
         Superhero::create([
             'name' => 'Superman',
             'real_name' => 'Clark Kent',
