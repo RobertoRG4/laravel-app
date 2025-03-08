@@ -19,9 +19,9 @@ class SuperheroFactory extends Factory
         return [
             'name' => $this->faker->name,
             'real_name' => $this->faker->name,
-            'publisher' => $this->faker->company, // Ensure this line is present
-            'universo_id' => 1, // Ensure this ID exists in the universos table
-            'genero_id' => 1, // Ensure this ID exists in the generos table
+            'publisher' => $this->faker->company,
+            'universo_id' => 1, 
+            'genero_id' => 1,
             'picture' => $this->faker->imageUrl(640, 480, 'superhero'),
             'created_at' => now(),
             'updated_at' => now(),
