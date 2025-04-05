@@ -7,7 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Universo extends Model
 {
     protected $table = "universos";
-    protected $fillable = [
-        "name"
-    ] ;
+    protected $fillable = ["name"] ;
 }

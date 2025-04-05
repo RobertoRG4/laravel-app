@@ -1,66 +1,58 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Gender;
+use Illuminate\Http\Request;
 
-class GenderController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $genders = Gender::all();
-        return view("gender.index", compact("genders"));
+class GenderController extends Controller{
+    public function index(){
+        $genders = Gender::paginate(10);
+        return view('genders.index', compact('genders'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('genders.create'); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Gender::create([
+            'name' => $request->name,
+        ]);
+        return redirect()->route('genders.index');  
+    }
+    public function show($id){
+        $gender = Gender::find($id);
+        if (!$gender) {
+            abort(404, "Gender not found");
+        }
+        return view('genders.show', compact('gender'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    public function edit($id){
+        $gender = Gender::findOrFail($id); 
+        return view('genders.edit', compact('gender')); 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    public function update(Request $request, $id){
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $gender = Gender::findOrFail($id);
+        $gender->name = $request->name;
+        $gender->save();
+
+        return redirect()->route('genders.index');  
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function destroy($id){
+        $gender = Gender::findOrFail($id);
+        $gender->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('genders.index')->with('success', 'Gender deleted successfully');
     }
 }
