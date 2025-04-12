@@ -8,4 +8,8 @@ class Universo extends Model
 {
     protected $table = "universos";
     protected $fillable = ["name"] ;
+    public function superheroes()
+    {
+        return $this->hasMany(Superhero::class, 'universo_id');
+    }
 }
