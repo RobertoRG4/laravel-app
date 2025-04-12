@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get("/api/universes",[UniverseApiController::class, "index"]);
-Route::get("/api/universes/{name}",[UniverseApiController::class, "show"]);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
