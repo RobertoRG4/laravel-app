@@ -6,7 +6,7 @@ use App\Http\Controllers\UniverseApiController;
 use App\Http\Controllers\UniverseController;
 use App\Http\Controllers\GeneralController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FormController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,5 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get("/form",function(){
+    return view("form");
+});
+Route::post("/upload", [FormController::class, "upload"])->name("upload");
+Route::post("/download/{path}", [FormController::class, "download"])->where('path', '.*')->name("download");
 require __DIR__.'/auth.php';
 
